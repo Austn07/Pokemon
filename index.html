@@ -97,6 +97,7 @@ function updateGameArea() {
 var intervalID; // global variable to hold the interval ID
 
 function move(dir) {
+	var speed = 5;
     if (dir == "up") {
         myGamePiece.image.src = "images/AP2RubySpriteWalkingUp.gif";
         intervalID = setInterval(function() {
