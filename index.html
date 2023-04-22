@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Move Image with Arrow Keys</title>
+	<style type="text/css">
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		// load image
+		var img = new Image();
+		img.src = "https://www.example.com/image.png";
+
+		// set initial position
+		var x = canvas.width/2;
+		var y = canvas.height/2;
+
+		// set speed and direction
+		var speed = 5;
+		var dx = 0;
+		var dy = 0;
+
+		// listen for arrow key events
+		document.addEventListener("keydown", function(event) {
+			switch(event.keyCode) {
+				case 37: // left arrow
+					dx = -speed;
+					dy = 0;
+					break;
+				case 38: // up arrow
+					dx = 0;
+					dy = -speed;
+					break;
+				case 39: // right arrow
+					dx = speed;
+					dy = 0;
+					break;
+				case 40: // down arrow
+					dx = 0;
+					dy = speed;
+					break;
+			}
+		});
+
+		// move image and redraw canvas
+		function moveImage() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			x += dx;
+			y += dy;
+			ctx.drawImage(img, x, y);
+			requestAnimationFrame(moveImage);
+		}
+
+		 // start the animation
+		img.onload = function() {
+			moveImage();
+		};
+	</script>
+</body>
+</html>
