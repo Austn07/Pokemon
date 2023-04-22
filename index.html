@@ -95,6 +95,14 @@ function component(width, height, color, x, y, type) {
         }
     }
     this.newPos = function() {
+        // Check if the gamepiece is about to move outside of the canvas
+        if (this.x + this.speedX < 0 || this.x + this.speedX + this.width > myGameArea.canvas.width) {
+            this.speedX = 0;
+        }
+        if (this.y + this.speedY < 0 || this.y + this.speedY + this.height > myGameArea.canvas.height) {
+            this.speedY = 0;
+        }
+        // Update the position
         this.x += this.speedX;
         this.y += this.speedY;        
     }
