@@ -17,6 +17,27 @@ var myGamePiece;
 function startGame() {
     myGamePiece = new component(100, 100, "images/AP2RubySpriteFacingDown.png", 10, 120, "image");
     myGameArea.start();
+
+    // Add event listeners for arrow key presses and releases
+    document.addEventListener("keydown", function(event) {
+        if (event.code === "ArrowUp") {
+            move("up");
+        }
+        else if (event.code === "ArrowDown") {
+            move("down");
+        }
+        else if (event.code === "ArrowLeft") {
+            move("left");
+        }
+        else if (event.code === "ArrowRight") {
+            move("right");
+        }
+    });
+    document.addEventListener("keyup", function(event) {
+        if (event.code === "ArrowUp" || event.code === "ArrowDown" || event.code === "ArrowLeft" || event.code === "ArrowRight") {
+            clearmove();
+        }
+    });
 }
 
 var myGameArea = {
