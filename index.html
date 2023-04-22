@@ -15,7 +15,7 @@ canvas {
 var myGamePiece;
 
 function startGame() {
-    myGamePiece = new component(30, 30, "smiley.gif", 10, 120, "image");
+    myGamePiece = new component(100, 100, "images/AP2%20Ruby%20Sprite%20(standing%20forward).png", 10, 120, "image");
     myGameArea.start();
 }
 
@@ -74,17 +74,28 @@ function updateGameArea() {
 }
 
 function move(dir) {
-    myGamePiece.image.src = "angry.gif";
-    if (dir == "up") {myGamePiece.speedY = -1; }
-    if (dir == "down") {myGamePiece.speedY = 1; }
-    if (dir == "left") {myGamePiece.speedX = -1; }
-    if (dir == "right") {myGamePiece.speedX = 1; }
+    if (dir == "up") {
+        myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20away).gif";
+        myGamePiece.speedY = -1;
+    }
+    if (dir == "down") {
+        myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20forward).gif";
+        myGamePiece.speedY = 1;
+    }
+    if (dir == "left") {
+        myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20left).gif";
+        myGamePiece.speedX = -1;
+    }
+    if (dir == "right") {
+        myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20right).gif";
+        myGamePiece.speedX = 1;
+    }
 }
 
 function clearmove() {
-    myGamePiece.image.src = "smiley.gif";
-    myGamePiece.speedX = 0; 
-    myGamePiece.speedY = 0; 
+    myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(standing%20forward).png";
+    myGamePiece.speedX = 0;
+    myGamePiece.speedY = 0;
 }
 </script>
 <div style="text-align:center;width:480px;">
