@@ -99,29 +99,62 @@ function updateGameArea() {
 }
 
 let lastDir = "down"; // initialize the last direction as down
+let currentImageIndex = 0;
+const imageSets = {
+  up: [
+    "images/AP2RubySpriteWalkingUp1.gif",
+    "images/AP2RubySpriteWalkingUp2.gif",
+    "images/AP2RubySpriteWalkingUp3.gif",
+  ],
+  down: [
+    "images/AP2RubySpriteWalkingDown1.gif",
+    "images/AP2RubySpriteWalkingDown2.gif",
+    "images/AP2RubySpriteWalkingDown3.gif",
+  ],
+  left: [
+    "images/AP2RubySpriteWalkingLeft1.gif",
+    "images/AP2RubySpriteWalkingLeft2.gif",
+    "images/AP2RubySpriteWalkingLeft3.gif",
+  ],
+  right: [
+    "images/AP2RubySpriteWalkingRight1.gif",
+    "images/AP2RubySpriteWalkingRight2.gif",
+    "images/AP2RubySpriteWalkingRight3.gif",
+  ],
+};
 
 function move(dir) {
-    if (dir == "up") {
-        myGamePiece.image.src = "images/AP2RubySpriteWalkingUp.gif";
-        myGamePiece.speedY = -1;
-        lastDir = "up";
-    }
-    if (dir == "down") {
-        myGamePiece.image.src = "images/AP2RubySpriteWalkingDown.gif";
-        myGamePiece.speedY = 1;
-        lastDir = "down";
-    }
-    if (dir == "left") {
-        myGamePiece.image.src = "images/AP2RubySpriteWalkingLeft.gif";
-        myGamePiece.speedX = -1;
-        lastDir = "left";
-    }
-    if (dir == "right") {
-        myGamePiece.image.src = "images/AP2RubySpriteWalkingRight.gif";
-        myGamePiece.speedX = 1;
-        lastDir = "right";
-    }
+  clearInterval(currentInterval);
+  let currentInterval;
+  let imageSet = imageSets[dir];
+  if (dir === lastDir) {
+    currentImageIndex = (currentImageIndex + 1) % imageSet.length;
+  } else {
+    currentImageIndex = 0;
+  }
+  myGamePiece.image.src = imageSet[currentImageIndex];
+  currentInterval = setInterval(() => {
+    currentImageIndex = (currentImageIndex + 1) % imageSet.length;
+    myGamePiece.image.src = imageSet[currentImageIndex];
+  }, 500);
+  if (dir == "up") {
+    myGamePiece.speedY = -1;
+    lastDir = "up";
+  }
+  if (dir == "down") {
+    myGamePiece.speedY = 1;
+    lastDir = "down";
+  }
+  if (dir == "left") {
+    myGamePiece.speedX = -1;
+    lastDir = "left";
+  }
+  if (dir == "right") {
+    myGamePiece.speedX = 1;
+    lastDir = "right";
+  }
 }
+
 
 function clearmove() {
     if (lastDir == "up") {
