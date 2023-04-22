@@ -99,62 +99,51 @@ function updateGameArea() {
 }
 
 let lastDir = "down"; // initialize the last direction as down
-let currentImageIndex = 0;
-const imageSets = {
+let imageIndex = 0;
+const imagePaths = {
   up: [
-    "images/AP2RubySpriteWalkingUp1.gif",
-    "images/AP2RubySpriteWalkingUp2.gif",
-    "images/AP2RubySpriteWalkingUp3.gif",
+    "images/AP2RubySpriteWalkingUp1.png",
+    "images/AP2RubySpriteWalkingUp2.png",
+    "images/AP2RubySpriteWalkingUp3.png",
   ],
   down: [
-    "images/AP2RubySpriteWalkingDown1.gif",
-    "images/AP2RubySpriteWalkingDown2.gif",
-    "images/AP2RubySpriteWalkingDown3.gif",
+    "images/AP2RubySpriteWalkingDown1.png",
+    "images/AP2RubySpriteWalkingDown2.png",
+    "images/AP2RubySpriteWalkingDown3.png",
   ],
   left: [
-    "images/AP2RubySpriteWalkingLeft1.gif",
-    "images/AP2RubySpriteWalkingLeft2.gif",
-    "images/AP2RubySpriteWalkingLeft3.gif",
+    "images/AP2RubySpriteWalkingLeft1.png",
+    "images/AP2RubySpriteWalkingLeft2.png",
+    "images/AP2RubySpriteWalkingLeft3.png",
   ],
   right: [
-    "images/AP2RubySpriteWalkingRight1.gif",
-    "images/AP2RubySpriteWalkingRight2.gif",
-    "images/AP2RubySpriteWalkingRight3.gif",
+    "images/AP2RubySpriteWalkingRight1.png",
+    "images/AP2RubySpriteWalkingRight2-4.png",
+    "images/AP2RubySpriteWalkingRight3.png",
+	"images/AP2RubySpriteWalkingRight2-4.png",
   ],
 };
 
 function move(dir) {
-  clearInterval(currentInterval);
-  let currentInterval;
-  let imageSet = imageSets[dir];
-  if (dir === lastDir) {
-    currentImageIndex = (currentImageIndex + 1) % imageSet.length;
-  } else {
-    currentImageIndex = 0;
-  }
-  myGamePiece.image.src = imageSet[currentImageIndex];
-  currentInterval = setInterval(() => {
-    currentImageIndex = (currentImageIndex + 1) % imageSet.length;
-    myGamePiece.image.src = imageSet[currentImageIndex];
-  }, 500);
+  clearInterval(myGamePiece.imageInterval); // clear any previous interval
+
+  let images = imagePaths[dir]; // get the images for the current direction
+  myGamePiece.imageInterval = setInterval(() => {
+    myGamePiece.image.src = images[imageIndex];
+    imageIndex = (imageIndex + 1) % images.length; // increment the index and loop back to 0
+  }, 500); // switch image every 0.5 seconds
+
   if (dir == "up") {
     myGamePiece.speedY = -1;
-    lastDir = "up";
-  }
-  if (dir == "down") {
+  } else if (dir == "down") {
     myGamePiece.speedY = 1;
-    lastDir = "down";
-  }
-  if (dir == "left") {
+  } else if (dir == "left") {
     myGamePiece.speedX = -1;
-    lastDir = "left";
-  }
-  if (dir == "right") {
+  } else if (dir == "right") {
     myGamePiece.speedX = 1;
-    lastDir = "right";
   }
+  lastDir = dir;
 }
-
 
 function clearmove() {
     if (lastDir == "up") {
