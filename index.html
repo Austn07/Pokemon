@@ -17,8 +17,8 @@ var myGamePiece;
 function startGame() {
     myGamePiece = new component(100, 100, "images/AP2RubySpriteFacingDown.png", 10, 120, "image");
     myGameArea.start();
-
-    // Add event listeners for arrow key presses and releases
+    
+	// Add event listeners for arrow key presses and releases
     document.addEventListener("keydown", function(event) {
         if (event.code === "ArrowUp") {
             move("up");
@@ -94,51 +94,41 @@ function updateGameArea() {
     myGamePiece.update();
 }
 
-var intervalID; // global variable to hold the interval ID
+let lastDir = "down"; // initialize the last direction as down
 
 function move(dir) {
-	var speed = 5;
     if (dir == "up") {
         myGamePiece.image.src = "images/AP2RubySpriteWalkingUp.gif";
-        intervalID = setInterval(function() {
-            myGamePiece.speedY = -1;
-            myGamePiece.newPos();
-            myGameArea.clear();
-            myGamePiece.update();
-        }, 20); // run every 20 milliseconds
+        myGamePiece.speedY = -1;
+        lastDir = "up";
     }
     if (dir == "down") {
         myGamePiece.image.src = "images/AP2RubySpriteWalkingDown.gif";
-        intervalID = setInterval(function() {
-            myGamePiece.speedY = 1;
-            myGamePiece.newPos();
-            myGameArea.clear();
-            myGamePiece.update();
-        }, 20); // run every 20 milliseconds
+        myGamePiece.speedY = 1;
+        lastDir = "down";
     }
     if (dir == "left") {
         myGamePiece.image.src = "images/AP2RubySpriteWalkingLeft.gif";
-        intervalID = setInterval(function() {
-            myGamePiece.speedX = -1;
-            myGamePiece.newPos();
-            myGameArea.clear();
-            myGamePiece.update();
-        }, 20); // run every 20 milliseconds
+        myGamePiece.speedX = -1;
+        lastDir = "left";
     }
     if (dir == "right") {
         myGamePiece.image.src = "images/AP2RubySpriteWalkingRight.gif";
-        intervalID = setInterval(function() {
-            myGamePiece.speedX = 1;
-            myGamePiece.newPos();
-            myGameArea.clear();
-            myGamePiece.update();
-        }, 20); // run every 20 milliseconds
+        myGamePiece.speedX = 1;
+        lastDir = "right";
     }
 }
 
 function clearmove() {
-    clearInterval(intervalID);
-    myGamePiece.image.src = "images/AP2RubySpriteFacingDown.png";
+    if (lastDir == "up") {
+        myGamePiece.image.src = "images/AP2RubySpriteFacingUp.png";
+    } else if (lastDir == "down") {
+        myGamePiece.image.src = "images/AP2RubySpriteFacingDown.png";
+    } else if (lastDir == "left") {
+        myGamePiece.image.src = "images/AP2RubySpriteFacingLeft.png";
+    } else if (lastDir == "right") {
+        myGamePiece.image.src = "images/AP2RubySpriteFacingRight.png";
+    }
     myGamePiece.speedX = 0;
     myGamePiece.speedY = 0;
 }
