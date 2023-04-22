@@ -134,7 +134,7 @@ function move(dir) {
   myGamePiece.imageInterval = setInterval(() => {
     myGamePiece.image.src = images[imageIndex];
     imageIndex = (imageIndex + 1) % images.length; // increment the index and loop back to 0
-  }, 500); // switch image every 0.5 seconds
+  }, 300); // switch image every 0.3 seconds
 
   if (dir == "up") {
     myGamePiece.speedY = -1;
@@ -149,6 +149,7 @@ function move(dir) {
 }
 
 function clearmove() {
+	clearInterval(myGamePiece.imageInterval); // clear any previous interval
     if (lastDir == "up") {
         myGamePiece.image.src = "images/AP2RubySpriteFacingUp.png";
     } else if (lastDir == "down") {
