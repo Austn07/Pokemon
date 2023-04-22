@@ -73,26 +73,49 @@ function updateGameArea() {
     myGamePiece.update();
 }
 
+var intervalID; // global variable to hold the interval ID
+
 function move(dir) {
     if (dir == "up") {
         myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20away).gif";
-        myGamePiece.speedY = -1;
+        intervalID = setInterval(function() {
+            myGamePiece.speedY = -1;
+            myGamePiece.newPos();
+            myGameArea.clear();
+            myGamePiece.update();
+        }, 20); // run every 20 milliseconds
     }
     if (dir == "down") {
         myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20forward).gif";
-        myGamePiece.speedY = 1;
+        intervalID = setInterval(function() {
+            myGamePiece.speedY = 1;
+            myGamePiece.newPos();
+            myGameArea.clear();
+            myGamePiece.update();
+        }, 20); // run every 20 milliseconds
     }
     if (dir == "left") {
         myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20left).gif";
-        myGamePiece.speedX = -1;
+        intervalID = setInterval(function() {
+            myGamePiece.speedX = -1;
+            myGamePiece.newPos();
+            myGameArea.clear();
+            myGamePiece.update();
+        }, 20); // run every 20 milliseconds
     }
     if (dir == "right") {
         myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(walking%20right).gif";
-        myGamePiece.speedX = 1;
+        intervalID = setInterval(function() {
+            myGamePiece.speedX = 1;
+            myGamePiece.newPos();
+            myGameArea.clear();
+            myGamePiece.update();
+        }, 20); // run every 20 milliseconds
     }
 }
 
 function clearmove() {
+    clearInterval(intervalID);
     myGamePiece.image.src = "images/AP2%20Ruby%20Sprite%20(standing%20forward).png";
     myGamePiece.speedX = 0;
     myGamePiece.speedY = 0;
