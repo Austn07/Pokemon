@@ -9,6 +9,7 @@ canvas {
 	margin-right: auto;
 	border: 5px solid #8CFFFB;
     margin: 0 auto;
+	background-color: black;
     background-image: url('images/Pokemonbg.png');
     background-size: cover;
 }
@@ -55,8 +56,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 1750;
-        this.canvas.height = 700;
+        this.canvas.width = 800;
+        this.canvas.height = 350;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -189,8 +190,5 @@ function clearmove() {
   <button onmousedown="move('down')" onmouseup="clearmove()" ontouchstart="move('down')">DOWN</button>
 </div>
 
-<p>See the little Austn_07 walk around by clicking the buttons!</p>
-<br>
-<p>Arrow keys are still a work in progress :)</p>
 </body>
 </html>
